@@ -94,10 +94,87 @@ namespace AdventOfCode2021 {
                 return '0';
             }
         }
+
+        public static List<int[,]> get2DArrays(string fileName) {
+            string line = File.ReadAllText(fileName);
+            line = line.Replace("\r\n", " ");
+            line = line.Replace("  ", " ");
+            List<string> asStrings = line.Split(" ").ToList();
+            List<int> asInts = new List<int>();
+            foreach (string asString in asStrings) {
+                if (!String.IsNullOrWhiteSpace(asString)) {
+                    asInts.Add(Int32.Parse(asString));
+                }
+            }
+
+            List<int[,]> returnValues = new List<int[,]>();
+            int arrayCount = asInts.Count / 25;
+
+            for (int i = 0; i < arrayCount; i++) {
+                int[,] array = new int[5,5];
+                
+                for (int k = 0; k < 5; k++) {
+                    for (int h = 0; h < 5; h++) {
+                        array[k, h] = asInts[((k * 5) + (25 * i)) + h];
+                    }
+                }
+
+                returnValues.Add(array);
+            }
+
+            return returnValues;
+        }
     }
 
     public struct TextIntPair {
         public string text;
         public int value;
+    }
+
+    public struct BingoCard {
+        public List<int> calledNumbers;
+        public int[,] board;
+
+        public void addCalledNumber(int toAdd) {
+            calledNumbers.Add(toAdd);
+        }
+        
+        public bool hasBingo() {
+
+            for (int i = 0; i < 5; i++) {
+                if (calledNumbers.Contains(board[i, 0])
+                    && calledNumbers.Contains(board[i, 1])
+                    && calledNumbers.Contains(board[i, 2])
+                    && calledNumbers.Contains(board[i, 3])
+                    && calledNumbers.Contains(board[i, 4])) {
+
+                    return true;
+                }
+                
+                if (calledNumbers.Contains(board[0, i])
+                    && calledNumbers.Contains(board[1, i])
+                    && calledNumbers.Contains(board[2, i])
+                    && calledNumbers.Contains(board[3, i])
+                    && calledNumbers.Contains(board[4, i])) {
+
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+
+        public int getSumOfAllUnmarked() {
+            int sum = 0;
+            for (int i = 0; i < 5; i++) {
+                for (int j = 0; j < 5; j++) {
+                    if (!calledNumbers.Contains(board[i, j])) {
+                        sum += board[i, j];
+                    }
+                }
+            }
+
+            return sum;
+        }
     }
 }
