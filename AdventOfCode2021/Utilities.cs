@@ -20,6 +20,17 @@ namespace AdventOfCode2021 {
             return returnValues;
         }
 
+        public static List<int> GetIntegerInputFromDelimitedList(string fileName) {
+            string line = File.ReadAllText(fileName);
+            List<string> asStrings = line.Split(",").ToList();
+            List<int> asInts = new List<int>();
+            foreach (string s in asStrings) {
+                asInts.Add(Int32.Parse(s));
+            }
+
+            return asInts;
+        }
+
         public static List<TextIntPair> GetTextIntList(string fileName) {
             string[] lines = File.ReadAllLines(fileName);
             List<TextIntPair> returnValues = new List<TextIntPair>();
