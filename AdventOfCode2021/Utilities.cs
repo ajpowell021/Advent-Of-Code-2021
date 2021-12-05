@@ -124,6 +124,26 @@ namespace AdventOfCode2021 {
 
             return returnValues;
         }
+
+        public static List<VentLine> getVentLines(string fileName) {
+            string[] lines = File.ReadAllLines(fileName);
+            List<VentLine> ventLines = new List<VentLine>();
+            
+            foreach (string line in lines) {
+                VentLine ventLine = new VentLine();
+                string[] splitLine = line.Split(' ', 3);
+                string[] firstCoords = splitLine[0].Split(',');
+                string[] secondCoords = splitLine[2].Split(',');
+                ventLine.x1 = Int32.Parse(firstCoords[0]);
+                ventLine.y1 = Int32.Parse(firstCoords[1]);
+                ventLine.x2 = Int32.Parse(secondCoords[0]);
+                ventLine.y2 = Int32.Parse(secondCoords[1]);
+
+                ventLines.Add(ventLine);
+            }
+
+            return ventLines;
+        }
     }
 
     public struct TextIntPair {
@@ -176,5 +196,12 @@ namespace AdventOfCode2021 {
 
             return sum;
         }
+    }
+
+    public struct VentLine {
+        public int x1;
+        public int y1;
+        public int x2;
+        public int y2;
     }
 }
