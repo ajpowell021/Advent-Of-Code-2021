@@ -36,6 +36,12 @@ namespace AdventOfCode2021 {
 
             int dayFivePartTwoSolution = DayFive.getDayFivePartTwoSolution();
             Console.WriteLine("D5 P2:" + dayFivePartTwoSolution);
+
+            int daySixPartOneSolution = DaySix.getDaySixPartOneSolution();
+            Console.WriteLine("D6 P1: " + daySixPartOneSolution);
+            
+            long daySixPartTwoSolution = DaySix.getDaySixPartTwoSolution();
+            Console.WriteLine("D6 P2: " + daySixPartTwoSolution);
         }
     }
 }
